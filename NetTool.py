@@ -1,5 +1,5 @@
 import telnetlib
-
+import re
 
 class NetTool:
     PORT = 0
@@ -38,6 +38,24 @@ class NetTool:
             self.HandSocket = None
 
         return (self.MainSocket, self.HandSocket)
+
+    def ReadDataFromHand(self):
+        if self.HandSocket != None:
+            data = self.HandSocket.read_very_eager()
+            if data != b'':
+                try:
+                    splitted = re.split(r'/', data.decode('utf-8'))
+                    # 0 - hy, 1 - hz, 2 - wy, 3 - hy
+
+                    a1 = float(splitted[0]) / 10
+                    a2 = float(splitted[2]) / 10
+                    a3 = float(splitted[3]) / 10
+                    rot = float(splitted[1]) * -3
+                    a4 = float(splitted[4])
+                    a5 = float(splitted[5])
+                    return (a1,2,3, rot, a4, a5)
+                except:
+                    pass
 
 
 

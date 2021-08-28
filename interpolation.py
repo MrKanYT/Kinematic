@@ -1,7 +1,18 @@
 from config import cfg
-from inter_classes import *
+
+
+def remap(old_value, old_min, old_max, new_min, new_max):
+    out = ((old_value - old_min) / (old_max - old_min)) * (new_max - new_min) + new_min
+    if out > new_max:
+        out = new_max
+    elif out < new_min:
+        out = new_min
+    return out
 
 class Interpolation:
+
+    def __init__(self):
+        self.outPoint = self.OutPoint()
 
     def to_pygame(self, coords):
         return cfg.HEIGHT - coords
@@ -58,3 +69,12 @@ class Interpolation:
                 out_rects.append(Rect(test_points))
         self.Rects = out_rects
 
+    class OutPoint(pg.sprite.Sprite):
+        def __init__(self):
+            pg.sprite.Sprite.__init__(self)
+            self.rotA = 0
+            self.rotB = 0
+            self.rotC = 0
+            self.rotD = 0
+            self.rotE = 0
+            self.rotF = 0

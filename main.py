@@ -1,9 +1,6 @@
-#TEST
-
 import pygame as pg
 import pandas as pd
 from math import *
-from inter_classes import *
 import time
 import re
 from NetTool import NetTool
@@ -29,54 +26,21 @@ Interpolation = Interpolation()
 Interpolation.build_rects(CSVTools.pointsArray)    #собираем из этого массива квадраты
 
 
-oldRect = None
-
-
-def remap(old_value, old_min, old_max, new_min, new_max):
-    out = ((old_value - old_min) / (old_max - old_min)) * (new_max - new_min) + new_min
-    if out > new_max:
-        out = new_max
-    elif out < new_min:
-        out = new_min
-    return out
-
 while True: #основной цикл программы
-    if NT.HandSocket != None:
-        data = tn_hand.read_very_eager()
-        if data != b'':
-            try:
-                splitted = re.split(r'/', data.decode('utf-8'))
-                # 0 - hy, 1 - hz, 2 - wy, 3 - hy
+    PgTools.UpdateScreen()
+    PgTools.DrawAllText()
+    PgTools.InterpolationVisualizer.DrawAllRects(PgTools.screen)
 
-                hand_input.a1 = float(splitted[0]) / 10
-                hand_input.a2 = float(splitted[2]) / 10
-                hand_input.a3 = float(splitted[3]) / 10
-                hand_input.rot = float(splitted[1]) * -3
-                hand_input.a4 = float(splitted[4])
-                hand_input.a5 = float(splitted[5])
-            except:
-                pass
+    PgTools.handVisualiser.calc_points(PgTools.handVisualiser.hand_input.L1,
+                                       PgTools.handVisualiser.hand_input.L2,
+                                       PgTools.handVisualiser.hand_input.L3,
+                                       PgTools.handVisualiser.hand_input.a1,
+                                       PgTools.handVisualiser.hand_input.a2,
+                                       PgTools.handVisualiser.hand_input.a3)
+    PgTools.handVisualiser.calc_display_points(850, 175)
 
+    PgTools.handVisualiser.Visualise(PgTools.screen)
 
-    screen.fill('gray')     #очищаем экран
-    allSprites.draw(screen)     #выводим на экран все квадраты
-    pg.draw.circle(screen, (255, 255, 255), (input_circle.x, input_circle.y), input_circle.size/2)
-    input_circle_group.draw(screen)
-    draw_text(screen, f"Angle A: {round(outPoint.rotA)}", 30, 5, 50)
-    draw_text(screen, f"Angle B: {round(outPoint.rotB)}", 30, 5, 100)
-    draw_text(screen, f"Angle C: {round(outPoint.rotC)}", 30, 5, 150)
-    draw_text(screen, f"Angle D: {round(outPoint.rotD)}", 30, 5, 200)
-    draw_text(screen, f"Angle E: {round(outPoint.rotE)}", 30, 5, 250)
-    draw_text(screen, f"Angle F: {round(outPoint.rotF)}", 30, 5, 300)
-
-    hand_visualisation.calc_points(hand_input.L1, hand_input.L2, hand_input.L3, hand_input.a1, hand_input.a2, hand_input.a3)
-    hand_visualisation.calc_display_points(850, 175)
-
-    pg.draw.line(screen, [255 ,0 ,0], hand_visualisation.shoulder_point_display, hand_visualisation.wrist_point_display, 3)
-    pg.draw.line(screen, [0, 255, 0], hand_visualisation.wrist_point_display, hand_visualisation.hand_point_display, 3)
-    pg.draw.line(screen, [0, 0, 255], hand_visualisation.hand_point_display, hand_visualisation.end_point_display, 3)
-
-    hand_input.x, hand_input.y = hand_visualisation.hand_point
 
     for i in pointsArray:
         for i2 in i:
