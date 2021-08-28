@@ -1,12 +1,20 @@
 
-class Configuration:
+class cfg:
     CONNECT_TO_MAIN = False
     CONNECT_TO_HAND = False
 
+    IP_MAIN = "192.168.137.246"
+    IP_HAND = "192.168.137.18"
+
+    PORT = 23
+
+    CSV_PATH = "points_new.csv"
 
     WIDTH = 1200
     HEIGHT = 350  # настройки
     FPS = 60
+
+    TITLE = "Bilinear interpolation"
 
     LENS = {
         "shoulder": 250,
