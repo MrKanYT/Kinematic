@@ -2,7 +2,6 @@ from PGTools import PGTools
 from config import Configuration as cfg
 from CSVTools import CSVTools
 from Interpolation import *
-from Output import Output
 import pygame as pg
 
 PGTools = PGTools()
@@ -20,9 +19,11 @@ while True:
     PGTools.CheckEvents()
     PGTools.UpdateSurface()
 
-    PGTools.output.Draw()
+    PGTools.CheckCollide()
 
     PGTools.interpolationVisualiser.Update()
+
+    PGTools.output.Draw()
 
     pg.display.flip()
 

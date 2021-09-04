@@ -13,7 +13,9 @@ class InterpolationVisualiser:
 
     surface = None
     interpolationRects = [None]
+    point = None
     spritesGroup = pg.sprite.Group()
+    pointGroup = pg.sprite.Group()
 
     global_pos = [0, 0]
     global_size = [0, 0]
@@ -24,6 +26,9 @@ class InterpolationVisualiser:
         self.surface = surface
         self.global_pos = pos
         self.global_size = size
+        self.point = self.Point((self.global_pos[0] + self.global_size[0] / 2,
+                                 self.global_pos[1] + self.global_size[1] / 2))
+        self.pointGroup.add(self.point)
 
     def BuildRects(self, interpolationRects):
         self.interpolationRects = interpolationRects
@@ -34,6 +39,7 @@ class InterpolationVisualiser:
 
     def Update(self):
         self.spritesGroup.draw(self.surface)
+        self.pointGroup.draw(self.surface)
 
     def ToGlobal(self, rect):
         global_pos_x = round(remap(rect.points[2].x, self.CSV.min_X, self.CSV.max_X, self.global_pos[0], self.global_pos[0] + self.global_size[0]))
@@ -47,6 +53,19 @@ class InterpolationVisualiser:
 
         return ((global_pos_x, global_pos_y), (global_size_x, global_size_y))
 
+    def ToLocal(self, pos):
+        local_pos_x = round(remap(pos[0], self.global_pos[0], self.global_pos[0] + self.global_size[0], self.CSV.min_X, self.CSV.max_X))
+        local_pos_y = round(
+            remap(pos[1], self.global_pos[1], self.global_pos[1] + self.global_size[1], self.CSV.min_Y, self.CSV.max_Y))
+        return (local_pos_x, local_pos_y)
+
+    def Calculate(self, output, rect):
+        self.point.collide_rect = rect
+        local = self.ToLocal(self.point.rect.center)
+        out = (round(bilinear_interpolation(local[0], local[1], self.point.collide_rect.interpolationRect.GetPoints(0))),
+               round(bilinear_interpolation(local[0], local[1], self.point.collide_rect.interpolationRect.GetPoints(1))))
+        output.B = out[0]
+        output.C = out[1]
 
     class Rect(pg.sprite.Sprite):
 
@@ -66,3 +85,23 @@ class InterpolationVisualiser:
             self.rect = self.image.get_rect()
             self.rect.x = self.globalPos[0]
             self.rect.y = self.globalPos[1]
+
+    class Point(pg.sprite.Sprite):
+        collide_rect = None
+
+        def __init__(self, start_pos):
+            pg.sprite.Sprite.__init__(self)
+            self.size = 5
+            self.image = pg.Surface((self.size, self.size))
+            self.image.fill((0, 0, 255))
+            self.rect = self.image.get_rect()
+            self.rect.center = start_pos
+
+        def GetRect(self, objectsGroup):
+            hits = pg.sprite.spritecollide(self, objectsGroup, False)
+            try:
+                self.collide_rect = hits[0]
+                return hits[0]
+            except:
+                self.collide_rect = None
+                return None
