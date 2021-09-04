@@ -7,6 +7,7 @@ PGTools = PGTools()
 CSVTools = CSVTools()
 Interpolation = Interpolation()
 
+
 CSVTools.BakeDB(cfg.CSV_PATH)
 Interpolation.rects = InterpolationRect.BuildRects(None, CSVTools.pointsArray)
 PGTools.interpolationVisualiser.BuildRects(Interpolation.rects)
