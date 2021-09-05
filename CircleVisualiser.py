@@ -49,8 +49,8 @@ class CircleVisualiser:
 
     def SetPointFromDistance(self, dist):
         self.point.distance = round(remap(dist, self.interpolation_x[0], self.interpolation_x[1], 0, self.circle.radius))
-        self.point.global_pos = (self.circle.global_pos[0] + (self.point.distance * cos(self.point.angle)),
-                                 self.circle.global_pos[1] + (self.point.distance * sin(self.point.angle)))
+        self.point.global_pos = (self.circle.global_pos[0] + (self.point.distance * cos(radians(self.point.angle - 180))),
+                                 self.circle.global_pos[1] + (self.point.distance * sin(radians(self.point.angle - 180))))
 
     def CalculateAngle(self, pos):
         vector = pg.math.Vector2()
@@ -88,7 +88,7 @@ class CircleVisualiser:
         global_pos = []
         radius = 3
 
-        angle = 0
+        angle = 180
         distance = 0
 
         def __init__(self, surface, global_pos):

@@ -81,11 +81,16 @@ class PGTools:
             to_zero_y = self.mousePoint.rect.center[1] - self.circleVisualiser.circle.global_pos[1]
             if round(hypot(to_zero_x, to_zero_y)) < self.circleVisualiser.circle.radius:
                 self.circleVisualiser.SetPointFromGlobal(self.mousePoint.rect.center)
+                old_pos = self.interpolationVisualiser.point.rect.center
                 self.interpolationVisualiser.point.rect.center = (self.interpolationVisualiser.PosToGlobal((self.circleVisualiser.CalculateDistance(), 0))[0], self.interpolationVisualiser.point.rect.center[1])
                 _hit = self.interpolationVisualiser.point.GetRect(self.interpolationVisualiser.spritesGroup)
-                print(_hit)
                 if _hit != None:
-                    self.interpolationVisualiser.Calculate(self.output, _hit)
+                    try:
+                        self.interpolationVisualiser.Calculate(self.output, _hit)
+                    except:
+                        pass
+                else:
+                    self.interpolationVisualiser.point.rect.center = old_pos
 
     class MousePoint(pg.sprite.Sprite):
         pressed = False
