@@ -53,6 +53,12 @@ class InterpolationVisualiser:
 
         return ((global_pos_x, global_pos_y), (global_size_x, global_size_y))
 
+    def PosToGlobal(self, pos):
+        global_pos_x = round(remap(pos[0], self.CSV.min_X, self.CSV.max_X, self.global_pos[0], self.global_pos[0] + self.global_size[0]))
+        global_pos_y = round(
+            remap(pos[1], self.CSV.min_Y, self.CSV.max_Y, self.global_pos[1], self.global_pos[1] + self.global_size[1]))
+        return (global_pos_x, global_pos_y)
+
     def ToLocal(self, pos):
         local_pos_x = round(remap(pos[0], self.global_pos[0], self.global_pos[0] + self.global_size[0], self.CSV.min_X, self.CSV.max_X))
         local_pos_y = round(

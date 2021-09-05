@@ -1,6 +1,8 @@
 import pygame as pg
 from InterpolationVisualiser import InterpolationVisualiser
 from Output import Output
+from CircleVisualiser import CircleVisualiser
+from math import *
 
 class PGTools:
 
@@ -9,6 +11,7 @@ class PGTools:
     surface = None
 
     interpolationVisualiser = None
+    circleVisualiser = None
 
     width = None
     height = None
@@ -31,11 +34,14 @@ class PGTools:
 
         self.mousePoint = self.MousePoint()
 
-        interpolation_padding = 20
-        self.interpolationVisualiser = InterpolationVisualiser(self.surface, [interpolation_padding, interpolation_padding], [width/2 - interpolation_padding * 2, height/2 - interpolation_padding * 2])
+        self.interpolation_padding = 20
+        self.interpolationVisualiser = InterpolationVisualiser(self.surface, [self.interpolation_padding, self.interpolation_padding], [width/2 - self.interpolation_padding * 2, height/2 - self.interpolation_padding * 2])
 
-        output_padding = 20
-        self.output = Output(self.surface, [self.width / 2 + output_padding, self.height / 2 + output_padding])
+        self.output_padding = 20
+        self.output = Output(self.surface, [self.width / 2 + self.output_padding, self.height / 2 + self.output_padding])
+
+        self.circle_padding = 20
+        self.circleVisualiser = CircleVisualiser(self.surface, (self.width / 2 + self.circle_padding, 0 + self.circle_padding), (self.width / 2 - self.circle_padding * 2, self.height / 2 - self.circle_padding * 2), self.output)
 
 
     def UpdateSurface(self):
@@ -61,6 +67,7 @@ class PGTools:
             elif event.type == pg.MOUSEBUTTONUP:
                 self.mousePoint.pressed = False
 
+
     def CheckCollide(self):
         if self.mousePoint.pressed:
             self.mousePoint.rect.center = pg.mouse.get_pos()
@@ -68,6 +75,17 @@ class PGTools:
             if  _rect != None:
                 self.interpolationVisualiser.point.rect.center = self.mousePoint.rect.center
                 self.interpolationVisualiser.Calculate(self.output, _rect)
+                self.circleVisualiser.SetPointFromDistance(self.interpolationVisualiser.ToLocal(self.interpolationVisualiser.point.rect.center)[0])
+                return
+            to_zero_x = self.mousePoint.rect.center[0] - self.circleVisualiser.circle.global_pos[0]
+            to_zero_y = self.mousePoint.rect.center[1] - self.circleVisualiser.circle.global_pos[1]
+            if round(hypot(to_zero_x, to_zero_y)) < self.circleVisualiser.circle.radius:
+                self.circleVisualiser.SetPointFromGlobal(self.mousePoint.rect.center)
+                self.interpolationVisualiser.point.rect.center = (self.interpolationVisualiser.PosToGlobal((self.circleVisualiser.CalculateDistance(), 0))[0], self.interpolationVisualiser.point.rect.center[1])
+                _hit = self.interpolationVisualiser.point.GetRect(self.interpolationVisualiser.spritesGroup)
+                print(_hit)
+                if _hit != None:
+                    self.interpolationVisualiser.Calculate(self.output, _hit)
 
     class MousePoint(pg.sprite.Sprite):
         pressed = False

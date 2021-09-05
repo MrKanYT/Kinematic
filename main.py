@@ -13,6 +13,8 @@ CSVTools.BakeDB(cfg.CSV_PATH)
 Interpolation.rects = InterpolationRect.BuildRects(None, CSVTools.pointsArray)
 PGTools.interpolationVisualiser.CSV = CSVTools
 PGTools.interpolationVisualiser.BuildRects(Interpolation.rects)
+PGTools.circleVisualiser.interpolation_x = (CSVTools.min_X, CSVTools.max_X)
+PGTools.circleVisualiser.interpolation = PGTools.interpolationVisualiser
 
 
 while True:
@@ -22,6 +24,9 @@ while True:
     PGTools.CheckCollide()
 
     PGTools.interpolationVisualiser.Update()
+    PGTools.circleVisualiser.Update()
+
+    PGTools.circleVisualiser.Calculate()
 
     PGTools.output.Draw()
 
