@@ -54,8 +54,10 @@ def animate(i):
         global zs
 
         ax.clear()
-        ax.plot3D(xs, ys, zs, marker="o")
         scale = 500
+        plt.xlim(xmax=scale, xmin=0)
+        plt.ylim(ymax=scale, ymin=0)
+        ax.plot3D(xs, ys, zs, marker="o")
         ax.plot3D([0, scale, scale, 0, 0], [0, 0, scale, scale, 0], [0, 0, 0, 0, 0], linewidth=0)
         ax.plot3D([0, scale, scale, 0, 0], [0, 0, scale, scale, 0], [scale, scale, scale, scale, scale], linewidth=0)
 
@@ -68,7 +70,7 @@ root.bind('<KeyPress>', keydown)
 
 fig.canvas.mpl_disconnect(fig.canvas.manager.key_press_handler_id)
 canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
-ani = animation.FuncAnimation(fig, animate, interval=100)
+ani = animation.FuncAnimation(fig, animate, interval=10)
 canvas.draw()
 canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
