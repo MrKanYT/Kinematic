@@ -1,5 +1,5 @@
 from tkinter import *
-from UpperStatusBar import UpperStatusBar
+from UpperStatusBarWidget import UpperStatusBar
 from SavesWidget import SavesWidget
 from config import Cfg as cfg
 from tkinter import ttk
@@ -7,6 +7,11 @@ from PIL import Image, ImageTk
 from PointMenuWidget import PointMenuWidget
 from HandVisualisationWidget import HandVisualisationWidget
 from SavesMenuWidget import SavesMenuWidget
+from MatplotlibWidget import MatplotlibWidget
+from TimelineWidget import TimelineWidget
+from XYVisualisationWidget import XYVisualisationWidget
+from XZVisualisationWidget import XZVisualisationWidget
+from ControlPanelWidget import ControlPanelWidget
 
 class Main:
 
@@ -18,6 +23,11 @@ class Main:
     pointMenuWidget = None
     handVisualisationWidget = None
     savesMenuWidget = None
+    matplotlibWidget = None
+    timelineWidget = None
+    xyVisualisationWidget = None
+    xzVisualisationWidget = None
+    controlPanelWidget = None
 
     def __init__(self):
         self.root = Tk()
@@ -40,6 +50,12 @@ class Main:
         self.savesWidget = SavesWidget()
         self.pointMenuWidget = PointMenuWidget()
         self.handVisualisationWidget = HandVisualisationWidget()
+        self.savesMenuWidget = SavesMenuWidget()
+        self.matplotlibWidget = MatplotlibWidget()
+        self.timelineWidget = TimelineWidget()
+        self.xyVisualisationWidget = XYVisualisationWidget()
+        self.xzVisualisationWidget = XZVisualisationWidget()
+        self.controlPanelWidget = ControlPanelWidget()
 
         self.root.mainloop()
 

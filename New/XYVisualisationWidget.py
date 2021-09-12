@@ -2,15 +2,16 @@ from tkinter import *
 from tkinter import ttk
 from config import Cfg as cfg
 
-class PointMenuWidget:
+
+class XYVisualisationWidget:
 
     mainLabel = None
     textLabel = None
 
-    X = 1320
+    X = 210
     Y = 30
-    WIDTH = 275
-    HEIGHT = 310
+    WIDTH = 300
+    HEIGHT = 280
 
     def __init__(self):
 
@@ -18,12 +19,13 @@ class PointMenuWidget:
         self.mainLabel.place(x=self.X, y=self.Y)
 
         self.textLabel = Label(
-            text="<PointMenu>",
+            text="<XYVisualisation>",
             font="Arial 14",
             height=1,
             bg=cfg.SUBCOLOR,
             fg=cfg.TEXT_COLOR,
         )
-        self.textLabel.place(x=self.X + 90, y=self.Y)
+        self.textLabel.place(x=self.X + 60, y=self.Y)
+
 
 
