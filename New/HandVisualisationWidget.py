@@ -30,6 +30,7 @@ class HandVisualisationWidget:
         p1 = [10, height/2]
         p2 = self.GetPointPos(p1, l1, a1)
         p3 = self.GetPointPos(p2, l2, a2)
+        p4 = self.GetPointPos(p3, l3, a3)
 
         self.handCanvas.create_line(p1[0],
                                     p1[1],
@@ -45,6 +46,13 @@ class HandVisualisationWidget:
                                     width=5,
                                     fill=cfg.MAIN_COLOR)
 
+        self.handCanvas.create_line(p3[0],
+                                    p3[1],
+                                    p4[0],
+                                    p4[1],
+                                    width=5,
+                                    fill=cfg.MAIN_COLOR)
+
         self.handCanvas.create_oval(p1[0]-point_size,
                                     p1[1]-point_size,
                                     p1[0]+point_size,
@@ -52,9 +60,23 @@ class HandVisualisationWidget:
                                     fill=cfg.TEXT_COLOR,
                                     outline=cfg.TEXT_COLOR)
 
+        self.handCanvas.create_oval(p2[0] - point_size,
+                                    p2[1] - point_size,
+                                    p2[0] + point_size,
+                                    p2[1] + point_size,
+                                    fill=cfg.TEXT_COLOR,
+                                    outline=cfg.TEXT_COLOR)
+
+        self.handCanvas.create_oval(p3[0] - point_size,
+                                    p3[1] - point_size,
+                                    p3[0] + point_size,
+                                    p3[1] + point_size,
+                                    fill=cfg.TEXT_COLOR,
+                                    outline=cfg.TEXT_COLOR)
+
     def GetPointPos(self, sp, l, angle):
 
-        out = [int(sp[0] + l * cos(angle)), int(sp[1] + l * sin(angle))]
+        out = [int(sp[0] + l * cos(radians(angle))), int(sp[1] + l * sin(radians(angle)))]
         print(out)
         return out
 
@@ -83,7 +105,7 @@ class HandVisualisationWidget:
 
         self.A1Label = Label(
             master=self.mainLabel,
-            text="A1: 100°",
+            text="A1: 25°",
             font="Arial 14",
             height=1,
             bg=cfg.SUBCOLOR,
@@ -93,7 +115,7 @@ class HandVisualisationWidget:
 
         self.A2Label = Label(
             master=self.mainLabel,
-            text="A2: 73°",
+            text="A2: 5°",
             font="Arial 14",
             height=1,
             bg=cfg.SUBCOLOR,
@@ -103,7 +125,7 @@ class HandVisualisationWidget:
 
         self.A3Label = Label(
             master=self.mainLabel,
-            text="A3: 28°",
+            text="A3: 15°",
             font="Arial 14",
             height=1,
             bg=cfg.SUBCOLOR,
@@ -141,7 +163,7 @@ class HandVisualisationWidget:
         )
         self.A6Label.place(x=self.WIDTH - (self.WIDTH / 4) + 5, y=169)
 
-        self.DrawHand(-25, 5, -50, 80, 50, 30)
+        self.DrawHand(25, 5, 15, 80, 70, 40)
 
 
 
