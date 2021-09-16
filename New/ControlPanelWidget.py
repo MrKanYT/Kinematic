@@ -8,10 +8,10 @@ class ControlPanelWidget:
     mainLabel = None
     textLabel = None
 
-    X = 1320
-    Y = 345
-    WIDTH = 275
-    HEIGHT = 550
+    X = 1320 * cfg.SIZE_MULT
+    Y = 345 * cfg.SIZE_MULT
+    WIDTH = 275 * cfg.SIZE_MULT
+    HEIGHT = 550 * cfg.SIZE_MULT
 
     def __init__(self):
 
@@ -25,7 +25,7 @@ class ControlPanelWidget:
             bg=cfg.SUBCOLOR,
             fg=cfg.TEXT_COLOR,
         )
-        self.textLabel.place(x=self.X + 65, y=self.Y)
+        #self.textLabel.place(x=self.X + 65, y=self.Y)
 
 
 

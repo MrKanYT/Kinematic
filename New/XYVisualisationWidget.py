@@ -8,10 +8,10 @@ class XYVisualisationWidget:
     mainLabel = None
     textLabel = None
 
-    X = 210
-    Y = 30
-    WIDTH = 300
-    HEIGHT = 280
+    X = 210 * cfg.SIZE_MULT
+    Y = 30 * cfg.SIZE_MULT
+    WIDTH = 300 * cfg.SIZE_MULT
+    HEIGHT = 280 * cfg.SIZE_MULT
 
     def __init__(self):
 
@@ -25,7 +25,7 @@ class XYVisualisationWidget:
             bg=cfg.SUBCOLOR,
             fg=cfg.TEXT_COLOR,
         )
-        self.textLabel.place(x=self.X + 60, y=self.Y)
+        #self.textLabel.place(x=self.X + 60, y=self.Y)
 
 
 

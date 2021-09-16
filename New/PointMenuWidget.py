@@ -7,10 +7,10 @@ class PointMenuWidget:
     mainLabel = None
     textLabel = None
 
-    X = 1320
-    Y = 30
-    WIDTH = 275
-    HEIGHT = 310
+    X = 1320 * cfg.SIZE_MULT
+    Y = 30 * cfg.SIZE_MULT
+    WIDTH = 275 * cfg.SIZE_MULT
+    HEIGHT = 310 * cfg.SIZE_MULT
 
     def __init__(self):
 
@@ -24,6 +24,6 @@ class PointMenuWidget:
             bg=cfg.SUBCOLOR,
             fg=cfg.TEXT_COLOR,
         )
-        self.textLabel.place(x=self.X + 90, y=self.Y)
+        #self.textLabel.place(x=self.X + 90, y=self.Y)
 
 

@@ -8,10 +8,10 @@ class MatplotlibWidget:
     mainLabel = None
     textLabel = None
 
-    X = 515
-    Y = 30
-    WIDTH = 800
-    HEIGHT = 700
+    X = 515 * cfg.SIZE_MULT
+    Y = 30 * cfg.SIZE_MULT
+    WIDTH = 800 * cfg.SIZE_MULT
+    HEIGHT = 700 * cfg.SIZE_MULT
 
     def __init__(self):
 
@@ -25,7 +25,7 @@ class MatplotlibWidget:
             bg=cfg.SUBCOLOR,
             fg=cfg.TEXT_COLOR,
         )
-        self.textLabel.place(x=self.X + 310, y=self.Y)
+        #self.textLabel.place(x=self.X + 310, y=self.Y)
 
 
 

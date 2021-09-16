@@ -12,8 +12,8 @@ class UpperStatusBar:
         self.mainLabel = Label(border=0, bg=cfg.MAIN_COLOR, height=1, text="<Status>",
                            anchor="center",
                            padx=20,
-                           pady=4,
-                           font="Arial 14", fg=cfg.TEXT_COLOR,)
+                           pady=2,
+                           font="Arial 11", fg=cfg.TEXT_COLOR,)
         self.mainLabel.pack(side=TOP, fill=BOTH)
 
 

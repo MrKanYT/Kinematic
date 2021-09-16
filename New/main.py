@@ -33,12 +33,20 @@ class Main:
         self.root = Tk()
         self.style = ttk.Style()
 
-        borderImage = ImageTk.PhotoImage(Image.open("Images/RoundedImage.png"))
+        _image = Image.open("Images/RoundedImage.png")
+        borderImage = ImageTk.PhotoImage(_image)
         self.style.element_create("RoundedFrame",
                      "image", borderImage,
                      border=16, sticky="nsew")
         self.style.layout("RoundedFrame",
                      [("RoundedFrame", {"sticky": "nsew"})])
+
+        buttonImage = ImageTk.PhotoImage(Image.open("Images/RoundedButton.png"))
+        self.style.element_create("RoundedButton",
+                                  "image", buttonImage,
+                                  border=3, sticky="nsew")
+        self.style.layout("RoundedButton",
+                          [("RoundedButton", {"sticky": "nsew"})])
 
         self.root.title(cfg.WINDOW_NAME)
         self.root.geometry(cfg.SIZE)
