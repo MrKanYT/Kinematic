@@ -1,12 +1,12 @@
 from tkinter import *
 from tkinter import ttk
 from config import Cfg as cfg
+import Viewport3D
 
 
 class MatplotlibWidget:
 
     mainLabel = None
-    textLabel = None
 
     X = 515 * cfg.SIZE_MULT
     Y = 30 * cfg.SIZE_MULT
@@ -18,14 +18,10 @@ class MatplotlibWidget:
         self.mainLabel = ttk.Frame(style="RoundedFrame", height=self.HEIGHT, width=self.WIDTH)
         self.mainLabel.place(x=self.X, y=self.Y)
 
-        self.textLabel = Label(
-            text="<MatplotlibViewport>",
-            font="Arial 14",
-            height=1,
-            bg=cfg.SUBCOLOR,
-            fg=cfg.TEXT_COLOR,
-        )
-        #self.textLabel.place(x=self.X + 310, y=self.Y)
+        Viewport3D.Build(self.mainLabel)
+
+
+
 
 
 

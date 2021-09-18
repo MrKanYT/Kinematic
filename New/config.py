@@ -12,3 +12,11 @@ class Cfg:
     TEXT_COLOR = "#b5b5b5"
     LINE_COLOR = "#616161"
 
+    class ManipulatorConfig:
+
+        LIMIT_X = (150, 600)
+        Z_ANGLE_LIMIT = (-75, 75)
+
+
+
+

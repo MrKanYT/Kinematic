@@ -77,7 +77,6 @@ class HandVisualisationWidget:
     def GetPointPos(self, sp, l, angle):
 
         out = [int(sp[0] + l * cos(radians(angle))), int(sp[1] + l * sin(radians(angle)))]
-        print(out)
         return out
 
     def __init__(self):

@@ -13,6 +13,7 @@ from XYVisualisationWidget import XYVisualisationWidget
 from XZVisualisationWidget import XZVisualisationWidget
 from ControlPanelWidget import ControlPanelWidget
 
+
 class Main:
 
     root = None
