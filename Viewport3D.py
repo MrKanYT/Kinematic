@@ -10,16 +10,19 @@ shoulderX, shoulderY, shoulderZ = 10, 20, 30
 wristX, wristY, wristZ = 20, 30, 40
 handX, handY, handZ = 30, 40, 50
 
+class Viewport():
+
+    def keyPressed(self, event):
+        print("test")
+        pass
+
 root = None
 canvas = None
 plot3d = None
 point = None
 anim = None
 
-
-def cm2inch(sm):
-    return sm * 0.39
-
+cm2inch = lambda x: x * .39
 
 class Create3DPlot:
     def __init__(self):
@@ -193,6 +196,7 @@ class CreatePoint:
 
     def place_point(self, event):
         # сделать линию параллельной оси координат
+        print(event)
         if event.keysym == 'Shift_L':
             self.ShiftFlag = True
         else:

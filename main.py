@@ -60,7 +60,7 @@ class Main:
         self.pointMenuWidget = PointMenuWidget()
         self.handVisualisationWidget = HandVisualisationWidget()
         self.savesMenuWidget = SavesMenuWidget()
-        self.matplotlibWidget = MatplotlibWidget()
+        self.matplotlibWidget = MatplotlibWidget(self.root)
         self.timelineWidget = TimelineWidget()
         self.xyVisualisationWidget = XYVisualisationWidget()
         self.xzVisualisationWidget = XZVisualisationWidget()
