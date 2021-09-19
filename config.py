@@ -15,7 +15,7 @@ class Cfg:
     class ManipulatorConfig:
 
         LIMIT_X = (150, 600)
-        Z_ANGLE_LIMIT = (-75, 75)
+        Z_ANGLE_LIMIT = (0, 300)
 
 
 

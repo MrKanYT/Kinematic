@@ -48,4 +48,4 @@ def calc(Xpos, Ypos, Zpos, Qpos, L0, L1, L2, L2r, L2pr, L3, Lsrv):
     return (round(a0, 1), round(a1, 1), round(a2, 1), round(a3, 1), round(a4, 1))
 
 
-print(calc(300, 200, 215, 90, 115, 189, 242, 91, 89, 120, 20))
+print(calc(0, 500, 215, 90, 115, 189, 242, 91, 89, 120, 20))

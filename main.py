@@ -42,13 +42,6 @@ class Main:
         self.style.layout("RoundedFrame",
                      [("RoundedFrame", {"sticky": "nsew"})])
 
-        buttonImage = ImageTk.PhotoImage(Image.open("Images/RoundedButton.png"))
-        self.style.element_create("RoundedButton",
-                                  "image", buttonImage,
-                                  border=3, sticky="nsew")
-        self.style.layout("RoundedButton",
-                          [("RoundedButton", {"sticky": "nsew"})])
-
         self.root.title(cfg.WINDOW_NAME)
         self.root.geometry(cfg.SIZE)
         self.root.resizable(width=False, height=False)

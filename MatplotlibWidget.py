@@ -21,10 +21,10 @@ class MatplotlibWidget:
 
         self.mainLabel = ttk.Frame(style="RoundedFrame", height=self.HEIGHT, width=self.WIDTH)
         self.mainLabel.place(x=self.X, y=self.Y)
-
+    '''
         Viewport3D.Build(self.mainLabel)
 
-        self.root.bind("<KeyPress>", Viewport3D.point.changing_flags)
+        self.root.bind("<KeyPress>", Viewport3D.point.changing_flags)'''
 
 
 

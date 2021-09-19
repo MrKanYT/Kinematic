@@ -12,9 +12,17 @@ handX, handY, handZ = 30, 40, 50
 
 class Viewport():
 
-    def keyPressed(self, event):
-        print("test")
+
+
+    test = [1, 2, 3]
+    points = {test: Point()}
+    activePoint = [1, 2, 3]
+
+
+    def Draw(self):
         pass
+
+
 
 root = None
 canvas = None
@@ -30,7 +38,7 @@ class Create3DPlot:
         self.create_form(self.figure)  # Отображение рисунка над формой tkinter
 
     def create_plot(self):
-        fig = plt.figure(figsize=(cm2inch(10), cm2inch(10)), facecolor='silver', edgecolor='blue')
+        fig = plt.figure(figsize=(cm2inch(14), cm2inch(12)))
         ax_3d = fig.add_subplot(111, projection="3d")
 
         return fig, ax_3d
@@ -245,120 +253,6 @@ class CreatePoint:
             self.points['y'][-1] = self.params['y']
             self.points['z'][-1] = self.params['z']
 
-
-class CreateInterface:
-    def getAllList(self):
-        lst = [[point.points['x']], [point.points['y']], point.points['z']]
-        return lst
-
-    def __init__(self):
-        self.data_list = [('A', 'B', 'C'),
-                          ('a', 'b', 'c'),
-                          (1, 2, 3),
-                          ('A', 'B', 'C'),
-                          ('a', 'b', 'c'),
-                          (1, 2, 3),
-                          ('A', 'B', 'C'),
-                          ('a', 'b', 'c'),
-                          (1, 2, 3),
-                          ('A', 'B', 'C'),
-                          ('a', 'b', 'c'),
-                          (1, 2, 3),
-                          ('x', 'y', 'z')]
-
-        heads = ['Name1', 'Name2', 'Name3']
-
-        self.table = ttk.Treeview(root, show='headings')
-        self.table['columns'] = heads
-
-        for header in heads:
-            self.table.heading(header, text=header, anchor='center')
-            self.table.column(header, anchor='center')
-
-        for row in self.data_list:
-            self.table.insert('', tk.END, values=row)
-
-        scrollbar = ttk.Scrollbar(root, command=self.table.yview)
-        self.table.configure(yscrollcommand=scrollbar.set)
-
-
-def drawObjects(frame):
-    plot3d.ax_3d.clear()
-
-    plot3d.ax_3d.plot3D(point.points['x'], point.points['y'], point.points['z'], color='orange', marker='o')
-    plot3d.ax_3d.set_xlim(xmax=point.max, xmin=point.min)
-    plot3d.ax_3d.set_ylim(ymax=point.min, ymin=point.max)
-    plot3d.ax_3d.set_zlim(zmax=point.max + 200, zmin=point.min + 200)
-
-    plt.xlabel("X")
-    plt.ylabel("Y")
-
-    if len(point.points['x']) > 1:
-
-        x1 = point.points['x'][-1]
-        x2 = point.points['x'][-2]
-
-        y1 = point.points['y'][-1]
-        y2 = point.points['y'][-2]
-
-        z1 = point.points['z'][-1]
-        z2 = point.points['z'][-2]
-
-        if point.setPointFlag:
-
-            if point.AxesSphereMovementFlag:
-                a = np.linspace(0, 360, 50)
-
-                x, y, z = point.getSphericalCoordinates(a)
-
-                plot3d.ax_3d.plot3D(x, y, z, color='gray', linestyle=':')
-
-            if abs(z1 - z2) < 15 and abs(y1 - y2) < 15:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='red', linestyle=':')
-
-                if point.ShiftFlag:
-                    point.points['y'][-1] = y2
-                    point.params['y'] = y2
-                    point.points['z'][-1] = z2
-                    point.params['z'] = z2
-
-            if abs(z1 - z2) < 15 and abs(x1 - x2) < 15:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='green', linestyle=':')
-
-                if point.ShiftFlag:
-                    point.points['x'][-1] = x2
-                    point.params['x'] = x2
-                    point.points['z'][-1] = z2
-                    point.params['z'] = z2
-
-            if abs(x1 - x2) < 15 and abs(y1 - y2) < 15:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='blue', linestyle=':')
-
-                if point.ShiftFlag:
-                    point.points['x'][-1] = x2
-                    point.params['x'] = x2
-                    point.points['y'][-1] = y2
-                    point.params['y'] = y2
-
-        for i in range(len(point.points['x'])):
-            x1 = point.points['x'][i - 1]
-            x2 = point.points['x'][i]
-
-            y1 = point.points['y'][i - 1]
-            y2 = point.points['y'][i]
-
-            z1 = point.points['z'][i - 1]
-            z2 = point.points['z'][i]
-
-            if abs(z1 - z2) == 0 and abs(y1 - y2) == 0:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='red', marker='o')
-
-            if abs(z1 - z2) == 0 and abs(x1 - x2) == 0:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='green', marker='o')
-
-            if abs(x1 - x2) == 0 and abs(y1 - y2) == 0:
-                plot3d.ax_3d.plot3D((x1, x2), (y1, y2), (z1, z2), color='blue', marker='o')
-
 def Build(_root):
     global root
     global canvas
@@ -366,7 +260,7 @@ def Build(_root):
     global point
     global anim
     root = _root
-    canvas = tk.Canvas(root, width=900, height=900)  # Создать холст для отображения графики
+    canvas = tk.Canvas(root)  # Создать холст для отображения графики
 
     plot3d = Create3DPlot()
     point = CreatePoint()
