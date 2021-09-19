@@ -12,20 +12,6 @@ shoulderX, shoulderY, shoulderZ = 10, 20, 30
 wristX, wristY, wristZ = 20, 30, 40
 handX, handY, handZ = 30, 40, 50
 
-class Viewport():
-
-
-
-    test = [1, 2, 3]
-    points = {test: Point()}
-    activePoint = [1, 2, 3]
-
-
-    def Draw(self):
-        pass
-
-
-
 root = None
 canvas = None
 plot3d = None
