@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+#test
+
 startX, startY, startZ = 0, 0, 0
 shoulderX, shoulderY, shoulderZ = 10, 20, 30
 wristX, wristY, wristZ = 20, 30, 40
