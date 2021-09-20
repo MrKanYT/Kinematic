@@ -54,7 +54,7 @@ class Main:
         self.handVisualisationWidget = HandVisualisationWidget()
         self.savesMenuWidget = SavesMenuWidget()
         self.matplotlibWidget = MatplotlibWidget(self.root)
-        self.timelineWidget = TimelineWidget()
+        self.timelineWidget = TimelineWidget(self.root)
         self.xyVisualisationWidget = XYVisualisationWidget()
         self.xzVisualisationWidget = XZVisualisationWidget()
         self.controlPanelWidget = ControlPanelWidget()
